@@ -18,7 +18,7 @@ int main(int argc, char const *argv[])
 
     int countArgs = argc - 1;
 
-    char** upperArgs = (char**) malloc( countArgs * sizeof( char* ) );
+    char** upperArgs = (char**) calloc( countArgs, sizeof( char* ) );
 
     if ( upperArgs == NULL ) {
 
@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
 
         int currentArgLength = strlen( argv[i] );
 
-        upperArgs[indexUpper] = (char*) malloc( ( currentArgLength + 1) * sizeof( char ) );
+        upperArgs[indexUpper] = (char*) calloc( currentArgLength + 1, sizeof( char ) );
 
         if ( upperArgs[indexUpper] == NULL ) {
 
