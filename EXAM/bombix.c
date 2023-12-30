@@ -155,8 +155,8 @@ int main (int argc, char* argv[]) {
 
         printf( "Après explosion de la bombe :\n" );
 
-        supprimerLigne( &plateau, &nl, nc, nl-1 );
-        supprimerColonne( &plateau, nl, &nc, nc-1 );
+        supprimerLigne( &plateau, &nl, nc, indexX );
+        supprimerColonne( &plateau, nl, &nc, indexY );
 
         afficherPlateau( plateau, nl, nc );
 
@@ -300,15 +300,18 @@ bool supprimerLigne(char*** p, int *n, int m, int ligne) {
 
     free( ligneASupprimer );
 
+    for ( int i=ligne; i<(*n)-1; i++ ) {
+
+        (*p)[i] = realloc( (*p)[i+1], m * sizeof( char ) );
+
+        if ( (*p)[i] == NULL ) return false;
+    }
+
     (*n)--;
 
     *p = realloc( *p, (*n) * sizeof( char* ) );
 
-    if ( (*p) == NULL ) {
-
-        return false;
-
-    }
+    if ( (*p) == NULL ) return false;
 
     return true;
 }
